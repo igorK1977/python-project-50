@@ -3,3 +3,13 @@
 
 ### How to use gendiff
 [![asciicast](https://asciinema.org/a/OvmIBCS7lgeWKU0mRs6OhMtUK.svg)](https://asciinema.org/a/OvmIBCS7lgeWKU0mRs6OhMtUK)
+
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=igorK1977_python-project-50&metric=coverage)](https://sonarcloud.io/summary/new_code?id=igorK1977_python-project-50)
+ 
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=igorK1977_python-project-50&metric=alert_status)](https://sonarcloud.io/summary/new_code?id=igorK1977_python-project-50)
+ 
+[![Bugs](https://sonarcloud.io/api/project_badges/measure?project=igorK1977_python-project-50&metric=bugs)](https://sonarcloud.io/summary/new_code?id=igorK1977_python-project-50)
+ 
+[![Code Smells](https://sonarcloud.io/api/project_badges/measure?project=igorK1977_python-project-50&metric=code_smells)](https://sonarcloud.io/summary/new_code?id=igorK1977_python-project-50)
+ 
+[![Duplicated Lines (%)](https://sonarcloud.io/api/project_badges/measure?project=igorK1977_python-project-50&metric=duplicated_lines_density)](https://sonarcloud.io/summary/new_code?id=igorK1977_python-project-50)
