@@ -8,6 +8,7 @@ description = "Gendiff project"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "pytest-cov>=7.0.0",
     "ruff>=0.13.1",
 ]
 
