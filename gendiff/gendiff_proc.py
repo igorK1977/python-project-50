@@ -1,10 +1,7 @@
 import argparse
+from gendiff.file_parsing import read_file
 import json
 
-
-def read_file(file_path):
-    data = json.load(open(file_path))
-    return data
 
 def format(value):
     if isinstance(value, bool):
@@ -51,10 +48,13 @@ def format_diff(diff):
 
 def generate_diff(file_path1, file_path2):
     data1, data2 = read_file(file_path1), read_file(file_path2)
-    diff = create_diff(data1, data2)
+    if all([data1, data2]):
+        diff = create_diff(data1, data2)
+    else: 
+        return None
     return format_diff(diff)
 
-def request_proc():
+def request_processing():
     parser = argparse.ArgumentParser(
                     usage='gendiff [-h] first_file second_file',
                     description='Compares two configuration files and shows a difference.')
