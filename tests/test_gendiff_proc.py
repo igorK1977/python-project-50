@@ -40,7 +40,13 @@ def test_generate_diff():
     assert generate_diff(file_path1, file_path2) == expected
 
 def test_request_gendiff(capfd):
-    os.system('uv run gendiff /home/igor/files/file1.yml /home/igor/files/file2.yml')
+    FILE_NAME1 = 'file1.json'
+    FILE_NAME2 = 'file2.json'
+    file_path1 = get_test_data_path(FILE_NAME1)
+    file_path2 = get_test_data_path(FILE_NAME2)
+    command = f'uv run gendiff {file_path1} {file_path2}'
+    os.system(command)
     captured = capfd.readouterr()
+    result = captured.out
     expected = '- follow: false\n  host: hexlet.io\n- proxy: 123.234.53.22\n- timeout: 50\n+ timeout: 20\n+ verbose: true\n'
-    assert captured.out == expected
+    assert result == expected
