@@ -1,4 +1,4 @@
-from gendiff.gendiff_proc import read_file
+from gendiff.gendiff_processing import read_file
 from pathlib import Path
 
 

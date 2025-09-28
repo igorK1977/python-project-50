@@ -24,7 +24,6 @@ def format_diff_stylish(diff, level=-1):
         level += 1
         prefix = PREFIX_DEFAULT * max(0, level)
         for item in diff:
-            item_str = ''
             match item['status']:
                 case 'nonchanged' | 'deleted' | 'added':
                     diff_list.append(prefix + f'  {SYMB[item['status']]} {item['key']}: {format_diff_stylish(item['value'], level)}')
