@@ -10,3 +10,6 @@
 
 ### How to use gendiff with yaml files
 [![asciicast](https://asciinema.org/a/jiUbCjuQs7Yve0oqHimf07lI1.svg)](https://asciinema.org/a/jiUbCjuQs7Yve0oqHimf07lI1)
+
+### How to use gendiff
+[![asciicast](https://asciinema.org/a/IR3Lu0viVglUMoi7mkVRyeHMt.svg)](https://asciinema.org/a/IR3Lu0viVglUMoi7mkVRyeHMt)

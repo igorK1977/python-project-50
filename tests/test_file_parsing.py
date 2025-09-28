@@ -14,23 +14,25 @@ def test_read_file_incorr_format():
     file_path = get_test_data_path(FILE_NAME)
     assert read_file(file_path) is None
 
-def test_read_file_json():
+def test_read_file():
+    expected = {
+        "common": {
+            "setting1": "Value 1", 
+            "setting2": 200, 
+            "setting3": True, 
+            "setting6": {
+                "key": "value", 
+                "doge": {"wow": ""}}}, 
+            "group1": {"baz": "bas", "foo": "bar", "nest": {"key": "value"}}, 
+            "group2": {"abc": 12345, "deep": {"id": 45}}}
     FILE_NAME = 'file1.json'
-    expected = {'host': 'hexlet.io', 'timeout': 50, 'proxy': '123.234.53.22', 'follow': False}
-
     file_path = get_test_data_path(FILE_NAME)
     assert read_file(file_path) == expected
 
-def test_read_file_yml():
     FILE_NAME = 'file1.yml'
-    expected = {'host': 'hexlet.io', 'timeout': 50, 'proxy': '123.234.53.22', 'follow': False}
-
     file_path = get_test_data_path(FILE_NAME)
     assert read_file(file_path) == expected
 
-def test_read_file_yaml():
     FILE_NAME = 'file1.yaml'
-    expected = {'host': 'hexlet.io', 'timeout': 50, 'proxy': '123.234.53.22', 'follow': False}
-
     file_path = get_test_data_path(FILE_NAME)
     assert read_file(file_path) == expected

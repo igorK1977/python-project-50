@@ -1,5 +1,6 @@
-from gendiff.gendiff_proc import generate_diff, create_diff, format_diff
+from gendiff.gendiff_proc import generate_diff
 from pathlib import Path
+import pytest
 import os
 
 
@@ -9,44 +10,28 @@ def get_test_data_path(filename):
 def read_text_file(filename):
     return get_test_data_path(filename).read_text()
 
-def test_create_diff():
-    data1 = {'host': 'hexlet.io', 'timeout': 50, 'proxy': '123.234.53.22', 'follow': False}
-    data2 = {'timeout': 20, 'verbose': True, 'host': 'hexlet.io'}
-    expected = [
-        {'key': 'follow', 'value': False, 'status': 'deleted'},
-        {'key': 'host', 'value': 'hexlet.io', 'status': 'nonchanged'},
-        {'key': 'proxy', 'value': '123.234.53.22', 'status': 'deleted'},
-        {'key': 'timeout', 'value': 50, 'status': 'changed', 'new_value': 20},
-        {'key': 'verbose', 'status': 'added', 'value': True}]
+@pytest.fixture
+def file_path1():
+    FILE_NAME = 'file1.json'
+    file_path = get_test_data_path(FILE_NAME)  
+    return file_path
 
-    assert create_diff(data1, data2) == expected
+@pytest.fixture
+def file_path2():
+    FILE_NAME = 'file2.json'
+    file_path = get_test_data_path(FILE_NAME)  
+    return file_path
 
-def test_format_diff():
-    diff = [
-        {'key': 'follow', 'value': False, 'status': 'deleted'},
-        {'key': 'host', 'value': 'hexlet.io', 'status': 'nonchanged'},
-        {'key': 'proxy', 'value': '123.234.53.22', 'status': 'deleted'},
-        {'key': 'timeout', 'value': 50, 'status': 'changed', 'new_value': 20},
-        {'key': 'verbose', 'status': 'added', 'value': True}]
-    expected = read_text_file('generate_diff_expected.txt')
-    assert format_diff(diff) == expected
+@pytest.fixture
+def gendiff_expected():
+    return read_text_file('generate_diff_expected.txt')
 
-def test_generate_diff():
-    FILE_NAME1 = 'file1.json'
-    FILE_NAME2 = 'file2.json'
-    file_path1 = get_test_data_path(FILE_NAME1)
-    file_path2 = get_test_data_path(FILE_NAME2)
-    expected = read_text_file('generate_diff_expected.txt')
-    assert generate_diff(file_path1, file_path2) == expected
+def test_generate_diff(file_path1, file_path2, gendiff_expected):
+    assert generate_diff(file_path1, file_path2) == gendiff_expected
 
-def test_request_gendiff(capfd):
-    FILE_NAME1 = 'file1.json'
-    FILE_NAME2 = 'file2.json'
-    file_path1 = get_test_data_path(FILE_NAME1)
-    file_path2 = get_test_data_path(FILE_NAME2)
+def test_request_gendiff(capfd, file_path1, file_path2, gendiff_expected):
     command = f'uv run gendiff {file_path1} {file_path2}'
     os.system(command)
     captured = capfd.readouterr()
-    result = captured.out
-    expected = '- follow: false\n  host: hexlet.io\n- proxy: 123.234.53.22\n- timeout: 50\n+ timeout: 20\n+ verbose: true\n'
-    assert result == expected
+    expected = gendiff_expected + '\n'
+    assert captured.out == expected
