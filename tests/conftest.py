@@ -1,5 +1,5 @@
-from gendiff.formatter import format_diff, format_value
 from pathlib import Path
+import pytest
 
 
 def get_test_data_path(filename):
@@ -8,15 +8,62 @@ def get_test_data_path(filename):
 def read_text_file(filename):
     return get_test_data_path(filename).read_text()
 
-def test_format_value():
-    assert format_value(False) == 'false'
-    assert format_value(True) == 'true'
-    assert format_value(None) == 'null'
-    assert format_value('') == ''
-    assert format_value(123) == 123
+@pytest.fixture
+def json_file_path1():
+    FILE_NAME = 'file1.json'
+    return get_test_data_path(FILE_NAME) 
 
-def test_format_diff():
-    diff = [{'key': 'common', 'status': 'nonchanged', 'value': [
+@pytest.fixture
+def yml_file_path1():
+    FILE_NAME = 'file1.yml'
+    return get_test_data_path(FILE_NAME) 
+
+@pytest.fixture
+def yaml_file_path1():
+    FILE_NAME = 'file1.yaml'
+    return get_test_data_path(FILE_NAME) 
+
+@pytest.fixture
+def json_file_path2():
+    FILE_NAME = 'file2.json'
+    return get_test_data_path(FILE_NAME)
+
+@pytest.fixture
+def gendiff_plain_expected():
+    return read_text_file('gendiff_plain_expected.txt')
+
+@pytest.fixture
+def gendiff_stylish_expected():
+    return read_text_file('gendiff_stylish_expected.txt')
+
+@pytest.fixture
+def file_1_data():
+    return {
+        "common": {
+            "setting1": "Value 1", 
+            "setting2": 200, 
+            "setting3": True, 
+            "setting6": {
+                "key": "value", 
+                "doge": {"wow": ""}}}, 
+            "group1": {"baz": "bas", "foo": "bar", "nest": {"key": "value"}}, 
+            "group2": {"abc": 12345, "deep": {"id": 45}}}
+
+@pytest.fixture
+def file_2_data():
+    return {'common': {
+        'follow': False, 
+        'setting1': 'Value 1', 
+        'setting3': None, 
+        'setting4': 'blah blah', 
+        'setting5': {'key5': 'value5'}, 
+        'setting6': {'key': 'value', 'ops': 'vops', 'doge': {'wow': 'so much'}}}, 
+        'group1': {'foo': 'bar', 'baz': 'bars', 'nest': 'str'}, 
+        'group3': {'deep': {'id': {'number': 45}}, 'fee': 100500}}
+
+@pytest.fixture
+def diff():
+    return [{'key': 'common', 'status': 'nonchanged', 'value': [
                 {'key': 'follow', 'status': 'added', 'value': False}, 
                 {'key': 'setting1', 'value': 'Value 1', 'status': 'nonchanged'}, 
                 {'key': 'setting2', 'value': 200, 'status': 'deleted'}, 
@@ -43,6 +90,3 @@ def test_format_diff():
                         {'key': 'id', 'status': 'nonchanged', 'value': [
                             {'key': 'number', 'status': 'nonchanged', 'value': 45}]}]}, 
                     {'key': 'fee', 'status': 'nonchanged', 'value': 100500}]}]
-    
-    expected = read_text_file('generate_diff_expected.txt')
-    assert format_diff(diff, 'stylish') == expected

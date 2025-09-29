@@ -13,3 +13,6 @@
 
 ### How to use gendiff
 [![asciicast](https://asciinema.org/a/IR3Lu0viVglUMoi7mkVRyeHMt.svg)](https://asciinema.org/a/IR3Lu0viVglUMoi7mkVRyeHMt)
+
+### How to use gendiff styled
+[![asciicast](https://asciinema.org/a/lOrPCOqRvJ6rY99l2awDRaZWE.svg)](https://asciinema.org/a/lOrPCOqRvJ6rY99l2awDRaZWE)

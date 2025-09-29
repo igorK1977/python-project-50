@@ -1,37 +1,36 @@
 from gendiff.gendiff_processing import generate_diff
-from pathlib import Path
-import pytest
 import os
 
 
-def get_test_data_path(filename):
-    return Path(__file__).parent / "test_data" / filename
+def test_generate_diff(json_file_path1, json_file_path2, gendiff_stylish_expected, gendiff_plain_expected):
+    assert generate_diff(json_file_path1, json_file_path2) == gendiff_stylish_expected
+    assert generate_diff(json_file_path1, json_file_path2, 'plain') == gendiff_plain_expected
 
-def read_text_file(filename):
-    return get_test_data_path(filename).read_text()
+def test_request_gendiff(capfd, json_file_path1, json_file_path2, gendiff_stylish_expected, gendiff_plain_expected):
+    expected = gendiff_stylish_expected + '\n'
 
-@pytest.fixture
-def file_path1():
-    FILE_NAME = 'file1.json'
-    file_path = get_test_data_path(FILE_NAME)  
-    return file_path
-
-@pytest.fixture
-def file_path2():
-    FILE_NAME = 'file2.json'
-    file_path = get_test_data_path(FILE_NAME)  
-    return file_path
-
-@pytest.fixture
-def gendiff_expected():
-    return read_text_file('generate_diff_expected.txt')
-
-def test_generate_diff(file_path1, file_path2, gendiff_expected):
-    assert generate_diff(file_path1, file_path2) == gendiff_expected
-
-def test_request_gendiff(capfd, file_path1, file_path2, gendiff_expected):
-    command = f'uv run gendiff {file_path1} {file_path2}'
-    os.system(command)
+    os.system(f'uv run gendiff {json_file_path1} {json_file_path2}')
     captured = capfd.readouterr()
-    expected = gendiff_expected + '\n'
+    assert captured.out == expected
+
+    os.system(f'uv run gendiff --format stylish {json_file_path1} {json_file_path2}')
+    captured = capfd.readouterr()
+    assert captured.out == expected
+
+    os.system(f'gendiff {json_file_path1} {json_file_path2}')
+    captured = capfd.readouterr()
+    assert captured.out == expected
+
+    os.system(f'gendiff --format stylish {json_file_path1} {json_file_path2}')
+    captured = capfd.readouterr()
+    assert captured.out == expected
+
+    expected = gendiff_plain_expected + '\n'
+
+    os.system(f'uv run gendiff --format plain {json_file_path1} {json_file_path2}')
+    captured = capfd.readouterr()
+    assert captured.out == expected
+
+    os.system(f'gendiff --format plain {json_file_path1} {json_file_path2}')
+    captured = capfd.readouterr()
     assert captured.out == expected

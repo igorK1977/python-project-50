@@ -1,7 +1,8 @@
 import argparse
 from gendiff.file_parsing import read_file
 from gendiff.comparator import create_diff
-from gendiff.formatter import format_diff
+from gendiff.formatter.stylish import format_diff_stylish
+from gendiff.formatter.plain import format_diff_plain
 
 
 def generate_diff(file_path1, file_path2, format_name='stylish'):
@@ -10,7 +11,13 @@ def generate_diff(file_path1, file_path2, format_name='stylish'):
         diff = create_diff(data1, data2)
     else:
         return None
-    return format_diff(diff, format_name)
+    match format_name:
+        case 'stylish': 
+            return format_diff_stylish(diff)
+        case 'plain': 
+            return format_diff_plain(diff)
+        case _: 
+            return None
 
 def request_processing():
     parser = argparse.ArgumentParser(
@@ -20,8 +27,13 @@ def request_processing():
     parser.add_argument('second_file')
     parser.add_argument('-f', '--format', help='set format of output')
     args = parser.parse_args()
+    match args.format:
+        case None : 
+            print(generate_diff(args.first_file, args.second_file))
+        case _: 
+            print(generate_diff(args.first_file, args.second_file, args.format))
 
-    print(generate_diff(args.first_file, args.second_file))
+        
 
 
 
