@@ -18,7 +18,6 @@ def generate_diff(file_path1, file_path2, format_name='stylish'):
         case 'plain': 
             return format_diff_plain(diff)
         case 'json':
-            print('------------- go to json format')
             return format_diff_json(diff)
         case _: 
             return None

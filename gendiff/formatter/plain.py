@@ -1,6 +1,6 @@
 def format_diff_plain(diff):
     def format_plain_value(value):
-        if isinstance(value, list):
+        if isinstance(value, dict):
             return '[complex value]'
         else:
             if isinstance(value, str):
@@ -16,18 +16,18 @@ def format_diff_plain(diff):
                     return value
                 
     def format(diff, path=''):
-        if isinstance(diff, list):
+        if isinstance(diff, dict):
             diff_list = []
-            for item in diff:
-                match item['status']:
+            for key, value in diff.items():
+                match value['status']:
                     case 'deleted':
-                        diff_list.append(f"Property '{path + item['key']}' was removed")
+                        diff_list.append(f"Property '{path}{key}' was removed")
                     case 'added':
-                        diff_list.append(f"Property '{path + item['key']}' was added with value: {format_plain_value(item['value'])}")
+                        diff_list.append(f"Property '{path}{key}' was added with value: {format_plain_value(value['value'])}")
                     case 'changed':
-                        diff_list.append(f"Property '{path + item['key']}' was updated. From {format_plain_value(item['value'])} to {format_plain_value(item['new_value'])}")
+                        diff_list.append(f"Property '{path}{key}' was updated. From {format_plain_value(value['value'])} to {format_plain_value(value['new_value'])}")
                     case 'nonchanged':
-                        result = format(item['value'], path + item['key'] + '.')
+                        result = format(value['value'], path + key + '.')
                         if result is not None:
                             diff_list.append(result)
             return '\n'.join(diff_list)

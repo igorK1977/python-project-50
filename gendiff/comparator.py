@@ -1,19 +1,19 @@
 def data_to_diff(data):
     if isinstance(data, dict):
-        result = []
+        result = {}
         keys = sorted(list(set(list(data.keys()))))
         for key in keys:
-            item = {'key': key, 'status': 'nonchanged', 'value': data_to_diff(data[key])}
-            result.append(item)
+            item = {'status': 'nonchanged', 'value': data_to_diff(data[key])}
+            result[key] = item
         return result
     else:
         return data
 
 def create_diff(data1, data2):
     keys = sorted(list(set(list(data1.keys()) + list(data2.keys()))))
-    diff = []
+    diff = {}
     for key in keys:
-        item = {'key': key}
+        item = {}
         if key in data1 and key not in data2:
             item['value'] = data_to_diff(data1[key])
             item['status'] = 'deleted'
@@ -32,5 +32,5 @@ def create_diff(data1, data2):
                     item['status'] = 'changed'
                     item['value'] = data_to_diff(data1[key])
                     item['new_value'] = data_to_diff(data2[key])
-        diff.append(item)
+        diff[key] = item
     return diff

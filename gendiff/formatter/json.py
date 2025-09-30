@@ -12,29 +12,16 @@ def format_diff_json(diff):
             case _:
                 return value
 
-    def format(diff, level=-1):
+    def format(diff, level=0):
         PREFIX_DEFAULT = '  '
-        if isinstance(diff, list):
+        if isinstance(diff, dict):
             diff_list = []
+            prev_prefix = PREFIX_DEFAULT * level
             level += 1
             prefix = PREFIX_DEFAULT * level
-            for item in diff:
-                if 'key' not in item:
-                    diff_list.append(prefix + f'"status": {format(item['status'], level)}')
-                    diff_list.append(prefix + f'"value": {format(item['value'], level)}')
-                    if item['status'] == 'changed':
-                        diff_list.append(prefix + f'"new_value": {format(item['new_value'], level)}')
-                else:
-                    match item['status']:
-                        case 'nonchanged':
-                            diff_list.append(prefix + f'"{item['key']}": {format([{'status': item['status'], 'value': item['value']}], level)}')
-                        case 'deleted':
-                            diff_list.append(prefix + f'"{item['key']}": {format([{'status': item['status'], 'value': item['value']}], level)}')
-                        case 'added':
-                            diff_list.append(prefix + f'"{item['key']}": {format([{'status': item['status'], 'value': item['value']}], level)}')                        
-                        case 'changed':
-                            diff_list.append(prefix + f'"{item['key']}": {format([{'status': item['status'], 'value': item['value'], 'new_value': item['new_value']}], level)}') 
-            return '{\n' + ',\n'.join(diff_list) + '\n' + prefix + '}'
+            for key, value in diff.items():
+                diff_list.append(prefix + f'"{key}": {format(value, level)}')
+            return '{\n' + ',\n'.join(diff_list) + '\n' + prev_prefix + '}'
         else:
             return format_json_value(diff)
         
