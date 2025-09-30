@@ -1,0 +1,125 @@
+{
+"common": {
+  "status": "nonchanged",
+  "value": {
+    "follow": {
+      "status": "added",
+      "value": false
+      },
+    "setting1": {
+      "status": "nonchanged",
+      "value": "Value 1"
+      },
+    "setting2": {
+      "status": "deleted",
+      "value": 200
+      },
+    "setting3": {
+      "status": "changed",
+      "value": true,
+      "new_value": null
+      },
+    "setting4": {
+      "status": "added",
+      "value": "blah blah"
+      },
+    "setting5": {
+      "status": "added",
+      "value": {
+        "key5": {
+          "status": "nonchanged",
+          "value": "value5"
+          }
+        }
+      },
+    "setting6": {
+      "status": "nonchanged",
+      "value": {
+        "doge": {
+          "status": "nonchanged",
+          "value": {
+            "wow": {
+              "status": "changed",
+              "value": "",
+              "new_value": "so much"
+              }
+            }
+          },
+        "key": {
+          "status": "nonchanged",
+          "value": "value"
+          },
+        "ops": {
+          "status": "added",
+          "value": "vops"
+          }
+        }
+      }
+    }
+  },
+"group1": {
+  "status": "nonchanged",
+  "value": {
+    "baz": {
+      "status": "changed",
+      "value": "bas",
+      "new_value": "bars"
+      },
+    "foo": {
+      "status": "nonchanged",
+      "value": "bar"
+      },
+    "nest": {
+      "status": "changed",
+      "value": {
+        "key": {
+          "status": "nonchanged",
+          "value": "value"
+          }
+        },
+      "new_value": "str"
+      }
+    }
+  },
+"group2": {
+  "status": "deleted",
+  "value": {
+    "abc": {
+      "status": "nonchanged",
+      "value": 12345
+      },
+    "deep": {
+      "status": "nonchanged",
+      "value": {
+        "id": {
+          "status": "nonchanged",
+          "value": 45
+          }
+        }
+      }
+    }
+  },
+"group3": {
+  "status": "added",
+  "value": {
+    "deep": {
+      "status": "nonchanged",
+      "value": {
+        "id": {
+          "status": "nonchanged",
+          "value": {
+            "number": {
+              "status": "nonchanged",
+              "value": 45
+              }
+            }
+          }
+        }
+      },
+    "fee": {
+      "status": "nonchanged",
+      "value": 100500
+      }
+    }
+  }
+}

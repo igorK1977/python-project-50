@@ -16,3 +16,6 @@
 
 ### How to use gendiff styled
 [![asciicast](https://asciinema.org/a/lOrPCOqRvJ6rY99l2awDRaZWE.svg)](https://asciinema.org/a/lOrPCOqRvJ6rY99l2awDRaZWE)
+
+### How to use gendiff with json formatter
+[![asciicast](https://asciinema.org/a/yhQi5ubO92qCwb9WONw81Tgme.svg)](https://asciinema.org/a/yhQi5ubO92qCwb9WONw81Tgme)

@@ -37,6 +37,10 @@ def gendiff_stylish_expected():
     return read_text_file('gendiff_stylish_expected.txt')
 
 @pytest.fixture
+def gendiff_json_expected():
+    return read_text_file('gendiff_json_expected.txt')
+
+@pytest.fixture
 def file_1_data():
     return {
         "common": {
