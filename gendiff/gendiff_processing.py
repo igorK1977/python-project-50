@@ -1,9 +1,10 @@
 import argparse
-from gendiff.file_parsing import read_file
+
 from gendiff.comparator import create_diff
-from gendiff.formatter.stylish import format_diff_stylish
-from gendiff.formatter.plain import format_diff_plain
-from gendiff.formatter.json import format_diff_json
+from gendiff.file_parsing import read_file
+from gendiff.formatter.json import format_json
+from gendiff.formatter.plain import format_plain
+from gendiff.formatter.stylish import format_stylish
 
 
 def generate_diff(file_path1, file_path2, format_name='stylish'):
@@ -14,24 +15,26 @@ def generate_diff(file_path1, file_path2, format_name='stylish'):
         return None
     match format_name:
         case 'stylish': 
-            return format_diff_stylish(diff)
+            return format_stylish(diff)
         case 'plain': 
-            return format_diff_plain(diff)
+            return format_plain(diff)
         case 'json':
-            return format_diff_json(diff)
+            return format_json(diff)
         case _: 
             return None
+
 
 def request_processing():
     parser = argparse.ArgumentParser(
                     usage='gendiff [-h] first_file second_file',
-                    description='Compares two configuration files and shows a difference.')
+                    description='Compares two configuration '
+                    'files and shows a difference.')
     parser.add_argument('first_file')
     parser.add_argument('second_file')
     parser.add_argument('-f', '--format', help='set format of output')
     args = parser.parse_args()
     match args.format:
-        case None : 
+        case None: 
             print(generate_diff(args.first_file, args.second_file))
         case _: 
             print(generate_diff(args.first_file, args.second_file, args.format))

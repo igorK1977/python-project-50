@@ -1,44 +1,54 @@
 from pathlib import Path
+
 import pytest
 
 
 def get_test_data_path(filename):
     return Path(__file__).parent / "test_data" / filename
 
+
 def read_text_file(filename):
     return get_test_data_path(filename).read_text()
+
 
 @pytest.fixture
 def json_file_path1():
     FILE_NAME = 'file1.json'
     return get_test_data_path(FILE_NAME) 
 
+
 @pytest.fixture
 def yml_file_path1():
     FILE_NAME = 'file1.yml'
     return get_test_data_path(FILE_NAME) 
+
 
 @pytest.fixture
 def yaml_file_path1():
     FILE_NAME = 'file1.yaml'
     return get_test_data_path(FILE_NAME) 
 
+
 @pytest.fixture
 def json_file_path2():
     FILE_NAME = 'file2.json'
     return get_test_data_path(FILE_NAME)
 
+
 @pytest.fixture
 def gendiff_plain_expected():
     return read_text_file('gendiff_plain_expected.txt')
+
 
 @pytest.fixture
 def gendiff_stylish_expected():
     return read_text_file('gendiff_stylish_expected.txt')
 
+
 @pytest.fixture
 def gendiff_json_expected():
     return read_text_file('gendiff_json_expected.txt')
+
 
 @pytest.fixture
 def file_1_data():
@@ -53,6 +63,7 @@ def file_1_data():
             "group1": {"baz": "bas", "foo": "bar", "nest": {"key": "value"}}, 
             "group2": {"abc": 12345, "deep": {"id": 45}}}
 
+
 @pytest.fixture
 def file_2_data():
     return {'common': {
@@ -64,6 +75,7 @@ def file_2_data():
         'setting6': {'key': 'value', 'ops': 'vops', 'doge': {'wow': 'so much'}}}, 
         'group1': {'foo': 'bar', 'baz': 'bars', 'nest': 'str'}, 
         'group3': {'deep': {'id': {'number': 45}}, 'fee': 100500}}
+
 
 @pytest.fixture
 def diff():

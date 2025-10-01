@@ -1,5 +1,5 @@
-from gendiff.formatter.plain import format_diff_plain
+from gendiff.formatter.plain import format_plain
 
 
-def test_format_diff_plain(diff, gendiff_plain_expected):  
-    assert format_diff_plain(diff) == gendiff_plain_expected
+def test_format_plain(diff, gendiff_plain_expected):  
+    assert format_plain(diff) == gendiff_plain_expected

@@ -1,5 +1,6 @@
-from gendiff.gendiff_processing import generate_diff
 import os
+
+from gendiff.gendiff_processing import generate_diff
 
 
 def test_generate_diff(json_file_path1, json_file_path2, 
@@ -7,6 +8,7 @@ def test_generate_diff(json_file_path1, json_file_path2,
     assert generate_diff(json_file_path1, json_file_path2) == gendiff_stylish_expected
     assert generate_diff(json_file_path1, json_file_path2, 'plain') == gendiff_plain_expected
     assert generate_diff(json_file_path1, json_file_path2, 'json') == gendiff_json_expected
+
 
 def test_request_gendiff(capfd, json_file_path1, json_file_path2, 
                          gendiff_stylish_expected, gendiff_plain_expected, gendiff_json_expected):

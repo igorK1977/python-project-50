@@ -9,6 +9,7 @@ def data_to_diff(data):
     else:
         return data
 
+
 def create_diff(data1, data2):
     keys = sorted(list(set(list(data1.keys()) + list(data2.keys()))))
     diff = {}
@@ -25,7 +26,8 @@ def create_diff(data1, data2):
                 item['value'] = data_to_diff(data1[key])
                 item['status'] = 'nonchanged'
             else:
-                if isinstance(data1[key], dict) and isinstance(data2[key], dict):
+                if (isinstance(data1[key], dict) 
+                    and isinstance(data2[key], dict)):
                     item['status'] = 'nonchanged'
                     item['value'] = create_diff(data1[key], data2[key])
                 else:
