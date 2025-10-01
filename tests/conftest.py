@@ -72,38 +72,56 @@ def file_2_data():
         'setting3': None, 
         'setting4': 'blah blah', 
         'setting5': {'key5': 'value5'}, 
-        'setting6': {'key': 'value', 'ops': 'vops', 'doge': {'wow': 'so much'}}}, 
+        'setting6': {'key': 'value', 'ops': 'vops', 
+                     'doge': {'wow': 'so much'}}}, 
         'group1': {'foo': 'bar', 'baz': 'bars', 'nest': 'str'}, 
         'group3': {'deep': {'id': {'number': 45}}, 'fee': 100500}}
 
 
 @pytest.fixture
 def diff():
-    return {'common': {'status': 'nonchanged', 'value': 
-                       {'follow': {'status': 'added', 'value': False}, 
-                        'setting1': {'value': 'Value 1', 'status': 'nonchanged'}, 
-                        'setting2': {'value': 200, 'status': 'deleted'}, 
-                        'setting3': {'status': 'changed', 'value': True, 'new_value': None}, 
-                        'setting4': {'status': 'added', 'value': 'blah blah'}, 
-                        'setting5': {'status': 'added', 'value': 
-                                     {'key5': {'status': 'nonchanged', 'value': 'value5'}}}, 
-                        'setting6': {'status': 'nonchanged', 'value': 
-                                     {'doge': {'status': 'nonchanged', 'value': 
-                                               {'wow': {'status': 'changed', 'value': '', 'new_value': 'so much'}}}, 
-                                               'key': {'value': 'value', 'status': 'nonchanged'}, 
-                                               'ops': {'status': 'added', 'value': 'vops'}}}}}, 
-            'group1': {'status': 'nonchanged', 'value': 
-                       {'baz': {'status': 'changed', 'value': 'bas', 'new_value': 'bars'}, 
-                        'foo': {'value': 'bar', 'status': 'nonchanged'}, 
-                        'nest': {'status': 'changed', 'value': 
-                                 {'key': {'status': 'nonchanged', 'value': 'value'}}, 'new_value': 'str'}}}, 
-            'group2': {'value': {
-                        'abc': {'status': 'nonchanged', 'value': 12345}, 
-                        'deep': {'status': 'nonchanged', 'value': 
-                                 {'id': {'status': 'nonchanged', 'value': 45}}}}, 
-                                 'status': 'deleted'}, 
-            'group3': {'status': 'added', 'value': 
-                       {'deep': {'status': 'nonchanged', 'value': 
-                                 {'id': {'status': 'nonchanged', 'value': 
-                                         {'number': {'status': 'nonchanged', 'value': 45}}}}}, 
-                        'fee': {'status': 'nonchanged', 'value': 100500}}}}
+    return {
+        'common': {'status': 'nonchanged', 'value': 
+                    {'follow': {'status': 'added', 'value': False}, 
+                    'setting1': {'value': 'Value 1', 'status': 'nonchanged'}, 
+                    'setting2': {'value': 200, 'status': 'deleted'}, 
+                    'setting3': {'status': 'changed', 
+                                 'value': True, 'new_value': None}, 
+                    'setting4': {'status': 'added', 'value': 'blah blah'}, 
+                    'setting5': {'status': 'added', 'value': 
+                                    {'key5': {'status': 'nonchanged', 
+                                              'value': 'value5'}}}, 
+                    'setting6': {'status': 'nonchanged', 'value': 
+                                    {'doge': {'status': 'nonchanged', 'value': 
+                                            {'wow': {'status': 'changed', 
+                                                     'value': '', 
+                                                     'new_value': 'so much'}}}, 
+                                            'key': {'value': 'value', 
+                                                    'status': 'nonchanged'}, 
+                                            'ops': {'status': 'added', 
+                                                    'value': 'vops'}}}}}, 
+        'group1': {'status': 'nonchanged', 'value': 
+                    {'baz': {'status': 'changed', 'value': 'bas', 
+                             'new_value': 'bars'}, 
+                    'foo': {'value': 'bar', 'status': 'nonchanged'}, 
+                    'nest': {'status': 'changed', 'value': 
+                                {'key': {'status': 'nonchanged', 
+                                         'value': 'value'}}, 
+                                'new_value': 'str'}}}, 
+        'group2': {'value': {
+                    'abc': {'status': 'nonchanged', 'value': 12345}, 
+                    'deep': {'status': 'nonchanged', 'value': 
+                                {'id': {
+                                    'status': 'nonchanged', 
+                                    'value': 45}}}}, 
+                                'status': 'deleted'}, 
+        'group3': {'status': 'added', 'value': 
+                    {'deep': {
+                        'status': 'nonchanged', 'value': 
+                            {'id': {
+                                'status': 'nonchanged', 
+                                'value': {
+                                    'number': {
+                                        'status': 'nonchanged', 
+                                        'value': 45}}}}}, 
+                    'fee': {'status': 'nonchanged', 'value': 100500}}}}
