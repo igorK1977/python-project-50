@@ -1,4 +1,4 @@
-from gendiff.gendiff_processing import request_processing
+from gendiff.scripts.gendiff_processing import request_processing
 
 
 def main():

@@ -1,10 +1,10 @@
 import argparse
 
-from gendiff.comparator import create_diff
-from gendiff.file_parsing import read_file
-from gendiff.formatter.json import format_json
-from gendiff.formatter.plain import format_plain
-from gendiff.formatter.stylish import format_stylish
+from gendiff.formatters.json import format_json
+from gendiff.formatters.plain import format_plain
+from gendiff.formatters.stylish import format_stylish
+from gendiff.scripts.comparator import create_diff
+from gendiff.scripts.file_parsing import read_file
 
 
 def generate_diff(file_path1, file_path2, format_name='stylish'):

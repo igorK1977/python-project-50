@@ -1,4 +1,4 @@
-from gendiff.comparator import create_diff, data_to_diff
+from gendiff.scripts.comparator import create_diff, data_to_diff
 
 
 def test_date_to_diff():

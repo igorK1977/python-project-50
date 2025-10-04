@@ -1,4 +1,4 @@
-from gendiff.gendiff_processing import read_file
+from gendiff.scripts.gendiff_processing import read_file
 
 
 def test_read_file_incorr_format():

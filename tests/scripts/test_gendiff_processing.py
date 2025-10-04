@@ -1,6 +1,6 @@
 import os
 
-from gendiff.gendiff_processing import generate_diff
+from gendiff.scripts.gendiff_processing import generate_diff
 
 
 def test_generate_diff(
